@@ -1,0 +1,136 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PDF Output</title>
+
+    <style>
+
+ @page{
+     size: "A4";
+     margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+
+     @top-center{
+         content: "FINANCE MANAGER-MONTHLY REPORT";
+ 
+     }
+
+     @bottom-right{
+         content:"Page " counter(page)"of " counter(pages);
+     }
+ 
+ }
+    </style>
+</head>
+
+    
+<body>
+
+
+
+{% now "F" as current_month %}
+
+MONTHLY REPORT- {{ current_month }}
+
+
+
+
+
+
+<table class="table">
+    <h2>INCOME LIST</h2>
+    <thead class="thread">
+        
+        <tr>
+            <th> No </th>
+            <th> Amount </th>
+            <th> Source</th>
+            <th> Description</th>
+            <th> Date</th>
+            
+        </tr>
+     </thead>
+    
+
+    <tbody>
+
+        {% for income in income %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{income.amount}}</td>
+            <td>{{income.source}}</td>
+            <td>{{income.description}}</td>
+            <td>{{income.date}}</td>
+            
+        </tr>
+
+        {% endfor %}
+        
+        <tr>
+            <td><b>TOTAL :</b></td>
+           <td><b>₹{{total}}</b></td>
+           
+           </tr>
+  
+     </tbody>
+
+     
+     
+
+
+
+     <table class="table">
+        <h2>EXPENSES LIST</h2>
+         <thead class="thread">
+             
+             <tr>
+                 <th> No </th>
+                 <th> Amount </th>
+                 <th> Category</th>
+                 <th> Description</th>
+                 <th> Date</th>
+                 
+             </tr>
+          </thead>
+         
+     
+         <tbody>
+     
+             {% for expense in expenses %}
+             <tr>
+                 <td>{{forloop.counter}}</td>
+                 <td>{{expense.amount}}</td>
+                 <td>{{expense.category}}</td>
+                 <td>{{expense.description}}</td>
+                 <td>{{expense.date}}</td>
+                 
+             </tr>
+     
+             {% endfor %}
+             <tr>
+                 <td><b>TOTAL :</b></td>
+                 <td><b>₹{{total1}}</b></td>
+                 </tr>
+                 <tr>
+
+                    <table class="table">
+                        <h2>SAVINGS</h2>
+                    
+                    {% if savings > 0 %}
+                     <td><b>YOU HAVE SAVED: ₹{{savings}}</b></td>
+                     {% elif savings == 0 %}
+                     <td><b>{{savings}}</b></td>
+                     {% else %}
+                     <td><b>EXPENSES EXCEEDED BY: ₹{{savings}}</b></td>
+                     {% endif %}
+                    </tr>
+          </tbody>
+     
+</body>
+</html>
+
+

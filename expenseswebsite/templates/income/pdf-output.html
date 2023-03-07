@@ -1,0 +1,85 @@
+
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PDF Output</title>
+
+    <style>
+
+ @page{
+     size: "A4";
+     margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+
+     @top-center{
+         content: "FINANCE MANAGER-INCOME REPORT";
+ 
+     }
+
+     @bottom-right{
+         content:"Page " counter(page)"of " counter(pages);
+     }
+ }
+    </style>
+</head>
+
+    
+<body>
+
+<img
+src="data:image/png;base64,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"
+/>
+
+{% now "F" as current_month %}
+
+INCOME- {{ current_month }}
+
+
+<h2>INCOME LIST</h2>
+
+
+
+<table class="table">
+    <thead class="thread">
+        
+        <tr>
+            <th> No </th>
+            <th> Amount </th>
+            <th> Source</th>
+            <th> Description</th>
+            <th> Date</th>
+            
+        </tr>
+     </thead>
+    
+
+    <tbody>
+
+        {% for income in income %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{income.amount}}</td>
+            <td>{{income.source}}</td>
+            <td>{{income.description}}</td>
+            <td>{{income.date}}</td>
+            
+        </tr>
+
+        {% endfor %}
+        
+        <tr>
+            <td><b>TOTAL :</b></td>
+           <td><b>₹{{total}}</b></td>
+           
+           </tr>
+  
+     </tbody>
+</body>
+</html>
+
+
+
